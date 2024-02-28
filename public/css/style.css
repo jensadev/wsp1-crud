@@ -1,0 +1,10 @@
+body {
+  font-family: system-ui, sans-serif;
+  font-size: 1.2rem;
+}
+
+.wrapper {
+  max-width: 54rem;
+  margin-inline: auto;
+  padding: 1rem;
+}

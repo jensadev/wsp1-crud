@@ -1,9 +1,19 @@
 const express = require('express')
+const nunjucks = require('nunjucks')
 
 const app = express()
 
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app,
+})
+
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
-  res.send('Hello world med nodemon')
+  res.render('index.njk', {
+    title: "Landing page"
+  })
 })
 
 app.listen(3000, () => {
