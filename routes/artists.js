@@ -5,10 +5,7 @@ const pool = require('../db')
 
 // get /artists
 router.get('/', async (req, res) => {
-
   const [artists] = await pool.promise().query('SELECT * FROM jens_artist')
-
-  console.log(artists)
 
   res.render('artists.njk', {
     title: 'All artists',
