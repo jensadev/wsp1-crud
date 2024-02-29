@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { body, matchedData, validationResult } = require('express-validator')
+const {
+  body,
+  matchedData,
+  param,
+  validationResult,
+} = require('express-validator')
 
 const pool = require('../db')
 
@@ -24,11 +29,10 @@ router.post(
   '/new',
   body('name').notEmpty().trim().escape(),
   async (req, res) => {
-
-    const result = validationResult(req);
+    const result = validationResult(req)
 
     if (result.isEmpty()) {
-      const data = matchedData(req);
+      const data = matchedData(req)
       const [dbResult] = await pool
         .promise()
         .query('INSERT INTO jens_artist (name) VALUES (?)', [data.name])
@@ -40,29 +44,34 @@ router.post(
         res.status(500)
       }
     } else {
-      res.send({ errors: result.array() });
+      res.send({ errors: result.array() })
     }
   }
 )
 
 // get /artists/:id
-router.get('/:id', async (req, res) => {
-  const id = parseInt(req.params.id)
-  if (Number.isInteger(id)) {
-    // använd id hämta från databas
-    const [artist] = await pool
-      .promise()
-      .query('SELECT * FROM jens_artist WHERE id = ?', [id])
+router.get(
+  '/:id',
+  param('id').notEmpty().isInt().trim(),
+  async (req, res) => {
+    const result = validationResult(req)
+    console.log(result)
 
-    res.render('artist.njk', {
-      title: artist[0].name,
-      artist: artist[0],
-    })
-  } else {
-    // meddela användaren att något gick fel
-    console.log('id är inte en int: ', id)
-    res.redirect('/artists')
+    if (result.isEmpty()) {
+      const data = matchedData(req)
+      const [artist] = await pool
+        .promise()
+        .query('SELECT * FROM jens_artist WHERE id = ?', [data.id])
+
+        return res.render('artist.njk', {
+          title: artist[0].name,
+          artist: artist[0],
+        })
+    } else {
+      // använd result
+      res.redirect('/artists')
+    }
   }
-})
+)
 
 module.exports = router
