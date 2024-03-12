@@ -24,3 +24,36 @@ Review - album_id, score, text
 ```SQL
 SELECT jens_album.*, jens_artist.name AS artist FROM jens_album JOIN jens_artist ON jens_album.artist_id = jens_artist.id
 ```
+
+## Create
+
+
+## Update
+
+PUT request, stöds inte av forms i webbläsare
+XHTMLRequest, för att skicka PUT request
+
+Vanlig lösning är att skicka en POST request 
+
+REST route för detta
+
+GET /artists/:id/edit - visa formulär för att uppdatera en artist
+POST /artists/:id - uppdatera artisten
+
+```SQL	
+UPDATE jens_album SET titel = 'Nytt namn' WHERE id = 1
+```
+
+## Delete
+
+DELETE request, stöds inte av forms i webbläsare
+
+Vanlig lösning är att skicka en POST request eller en GET request
+
+REST route för detta
+
+GET eller POST till /artists/:id/delete - ta bort artisten
+
+```SQL
+DELETE FROM jens_album WHERE id = 1
+```
