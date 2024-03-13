@@ -19,6 +19,12 @@ Review - album_id, score, text
 - [x] GET /artists/new - Skapa en ny artist, visa formulär
 - [x] POST /artists/new - Skapar den nya artisten, INSERT INTO
 
+- [x] GET /artists/:id/edit - visa formulär för att uppdatera en artist
+- [x] POST /artists/:id - uppdatera artisten, UPDATE
+
+- [x] GET /artists/:id/delete - ta bort artisten
+- [x] POST /artists/:id/delete - ta bort artisten, DELETE
+
 ## Read
 
 ```SQL

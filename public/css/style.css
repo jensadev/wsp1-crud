@@ -18,3 +18,17 @@ form {
 input {
   padding: 0.4em;
 }
+
+.artists-list {
+  list-style: none;
+}
+
+.artists-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.artists-list li div {
+  display: flex;
+  gap: 1rem;
+}

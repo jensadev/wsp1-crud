@@ -7,9 +7,18 @@
   </h1>
   <p><a href="/artists/new">Create new</a> artist.</p>
 
-  <ul>
+  <ul class="artists-list">
     {% for artist in artists %}
-      <li><a href="/artists/{{ artist.id }}">{{ artist.name }}</a></li>
+      <li>
+        <a href="/artists/{{ artist.id }}">{{ artist.name }}</a>
+        <div>
+          <a href="/artists/{{ artist.id }}/edit">Edit</a>
+          <form action="/artists/{{ artist.id }}/delete" method="post">
+            <input type="hidden" value="{{ artist.id }}" name="id">
+            <input type="submit" value="Delete">
+          </form>
+        </div>
+      </li>
     {% endfor %}
   </ul>
 </main>
